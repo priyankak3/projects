@@ -27,25 +27,30 @@ export type Role = {
 export type Certificate = {
   title: string;
   issuer: string;
-  credential: string;
-  issued: string;
-  file: string;
+  credential?: string;
+  issued?: string;
+  file?: string;
 };
+const startYear = 2025;
+const yearsOfExperience = new Date().getFullYear() - startYear;
 
 export const profile = {
-  name: "Priyanka Sunil Kadam",
+  name: "Priyanka Kadam",
   title: "Software Development Engineer • Full Stack Developer",
   headline: "I design and build reliable backend systems, polished interfaces, and performance-oriented software that solves real business problems.",
   intro:
     "Software Development Engineer with experience across backend engineering, data management, and product-focused web applications. I enjoy building scalable systems, improving operational workflows, and turning complex requirements into reliable software with measurable impact.",
   location: "Pune, India",
   email: "itspriyanka.kadam@gmail.com",
-  linkedin: "",
-  github: "",
-  leetcode: "",
+  linkedin: "linkedin.com/in/priyankakadam03",
+  github: "https://github.com/priyankak3",
+  leetcode: "https://leetcode.com/priyankask/",
   portfolio: "",
+  hackerrank: "https://www.hackerrank.com/priyanka_kadam1",
   resume: "/resume.pdf",
+  yearsOfExperience: `${yearsOfExperience}+ years`,
 };
+
 
 // export const stats = [
 //   { label: "CGPA", value: "8.73" },
@@ -204,8 +209,16 @@ export const certificates: Certificate[] = [
     issued: "11 January, 2024",
     file: "/certificates/4ecde325-75d0-4468-9008-f39bb99ffff8.pdf",
   },
+  {
+    title: "Java Course Certificate",
+    issuer: "Harishankaran K",
+    file: "https://www.hackerrank.com/certificates/iframe/c4d080d9078b",
+  },
+  
 ];
 
 export const contactLinks = [
   { label: "Email", href: "mailto:itspriyanka.kadam@gmail.com", icon: "Mail" },
+  { label: "GitHub", href: "https://github.com/priyankak3", icon: "GitBranch" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/priyanka-sunil-kadam/", icon: "BriefcaseBusiness" },
 ];

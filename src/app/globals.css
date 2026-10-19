@@ -1,16 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050816;
-  --foreground: #f8fafc;
-  --muted: #cbd5e1;
-  --panel: rgba(15, 23, 42, 0.72);
-  --line: rgba(255, 255, 255, 0.08);
+  --bg: #0b1020;
+  --text: #edf2ff;
+  --muted: #a9b4d0;
+  --panel: rgba(255, 255, 255, 0.03);
+  --line: rgba(177, 196, 255, 0.14);
+  --accent: #b18cff;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f3f1ed;
+  --text: #1b1d2a;
+  --muted: #4e536a;
+  --panel: rgba(27, 29, 42, 0.03);
+  --line: rgba(27, 29, 42, 0.12);
+  --accent: #7b6fe8;
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -21,140 +33,57 @@ html {
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(168, 85, 247, 0.18), transparent 20%),
-    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.12), transparent 25%),
-    var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-geist-sans), Arial, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 * {
   box-sizing: border-box;
 }
 
-::selection {
-  background: rgba(168, 85, 247, 0.35);
-  color: white;
+a {
+  text-decoration: none;
 }
 
-.orbital-shell {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12), rgba(15, 23, 42, 0.16) 35%, rgba(2, 6, 23, 0.9) 72%),
-    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(3, 7, 18, 0.96));
-  box-shadow: inset 0 0 35px rgba(148, 163, 184, 0.08), 0 0 32px rgba(168, 85, 247, 0.12);
-  isolation: isolate;
-  will-change: transform;
-}
-
-.orbital-glow {
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(168, 85, 247, 0.18), rgba(34, 211, 238, 0.08) 45%, transparent 75%);
-  filter: blur(18px);
-  animation: breathingGlow 8s ease-in-out infinite alternate;
-}
-
-.particle-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+img {
   display: block;
-  opacity: 0.98;
+  max-width: 100%;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.42;
-    transform: translate(-50%, -50%) scale(0.96);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05);
-  }
+::selection {
+  background: rgba(177, 140, 255, 0.5);
+  color: #fff;
 }
 
-@keyframes beamGlow {
-  0% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
+:root[data-theme="light"] ::selection {
+  background: rgba(123, 111, 232, 0.18);
+  color: #111827;
 }
 
-@keyframes spinSlow {
+.reveal {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+@keyframes fadeInUp {
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0;
+    transform: translateY(12px);
   }
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-@keyframes spinReverse {
-  from {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-}
-
-@keyframes drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0.95);
-  }
-  100% {
-    transform: translate3d(8px, -12px, 0) scale(1.18);
-  }
-}
-
-@keyframes corePulse {
-  0%, 100% {
-    box-shadow: 0 0 70px rgba(168, 85, 247, 0.28), inset 0 0 25px rgba(255, 255, 255, 0.18);
-    filter: saturate(1);
-  }
-  50% {
-    box-shadow: 0 0 120px rgba(34, 211, 238, 0.26), inset 0 0 35px rgba(255, 255, 255, 0.22);
-    filter: saturate(1.2);
-  }
-}
-
-@keyframes breathingGlow {
-  0% {
-    transform: scale(0.98);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(1.08);
     opacity: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .orbital-shell {
-    border-radius: 50%;
-    box-shadow: inset 0 0 22px rgba(148, 163, 184, 0.08), 0 0 20px rgba(168, 85, 247, 0.08);
-  }
-
-  .orbital-glow {
-    inset: 10%;
-    filter: blur(12px);
+    transform: translateY(0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .reveal {
+    animation: none !important;
   }
 
   *, *::before, *::after {

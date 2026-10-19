@@ -25,8 +25,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#050816] text-white">{children}</body>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full bg-[#050816] text-white">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const saved = localStorage.getItem('portfolio-theme');
+                  const theme = saved === 'light' || saved === 'dark' ? saved : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                  document.documentElement.setAttribute('data-theme', theme);
+                  document.documentElement.style.colorScheme = theme;
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
