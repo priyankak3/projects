@@ -86,7 +86,7 @@ export default function Home() {
                   {item}
                 </a>
               ))}
-              <a href={profile.resume} download className="transition hover:text-[var(--text)]">
+              <a href={profile.resume} download="resume.pdf" className="transition hover:text-[var(--text)]">
                 Resume
               </a>
             </div>
@@ -124,7 +124,7 @@ export default function Home() {
                 <ChevronRight size={16} />
               </a>
 
-              <a href={profile.resume} download className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--panel)] px-5 py-3 text-sm font-medium text-[var(--text)] transition hover:opacity-90">
+              <a href={profile.resume} download="resume.pdf" className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--panel)] px-5 py-3 text-sm font-medium text-[var(--text)] transition hover:opacity-90">
                 <Download size={16} />
                 Download Resume
               </a>
@@ -387,7 +387,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <a href={profile.resume} download className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--text)] px-5 py-3 text-sm font-medium text-[var(--bg)] transition hover:opacity-90">
+                <a href={profile.resume} download="resume.pdf" className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--text)] px-5 py-3 text-sm font-medium text-[var(--bg)] transition hover:opacity-90">
                   <Download size={15} />
                   Download resume
                 </a>

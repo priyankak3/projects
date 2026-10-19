@@ -47,7 +47,7 @@ export const profile = {
   leetcode: "https://leetcode.com/priyankask/",
   portfolio: "",
   hackerrank: "https://www.hackerrank.com/priyanka_kadam1",
-  resume: "/resume.pdf",
+  resume: "/Priyanka_Sunil_Kadam_FlowCV_Resume_2026-10-18.pdf",
   yearsOfExperience: `${yearsOfExperience}+ years`,
 };
 
@@ -139,8 +139,8 @@ export const projects: Project[] = [
       "Built a hotel booking platform enabling travelers to search, book, and manage reservations with real-time availability and authentication.",
     impact: "Designed a useful booking workflow focused on availability, traveler UX, and practical application usability.",
     stack: ["MongoDB", "Express", "React", "Node.js"],
-    link: "",
-    repo: "",
+    link: "https://github.com/priyankak3/Trip-Hotel-Search",
+    repo: "https://github.com/priyankak3/Trip-Hotel-Search",
     accent: "from-rose-500/20 via-orange-500/10 to-violet-500/20",
   },
 ];
