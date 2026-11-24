@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     description: 'Portfolio of a Computer Engineer focused on software engineering, full-stack development, and practical product problem solving.',
     type: 'website',
   },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

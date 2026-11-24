@@ -46,7 +46,7 @@ export const profile = {
   github: "https://github.com/priyankak3",
   leetcode: "https://leetcode.com/priyankask/",
   portfolio: "",
-  hackerrank: "https://www.hackerrank.com/priyanka_kadam1",
+  hackerrank: "https://www.hackerrank.com/profile/piyukadam74",
   resume: "/Priyanka_Sunil_Kadam_FlowCV_Resume_2026-10-18.pdf",
   yearsOfExperience: `${yearsOfExperience}+ years`,
 };
@@ -158,6 +158,19 @@ export const experience: Role[] = [
       "Enhanced transaction reprocessing and failure-recovery flows by tracking persisted transaction and message states to identify failed or non-processed instructions and route eligible transactions back through downstream processing.",
       "Re-engineered a legacy data access module by replacing JAR-based retrieval with an Oracle database function, improving concurrent reads, eliminating lock contention, and simplifying application-layer processing.",
       "Owned production observability for an enterprise financial transaction platform by building Terraform-managed SLO/SLI dashboards, log-based metrics, and alert policies in GCP Monitoring to detect processing delays exceeding 15 minutes and track reference message processing against a 95% within-30-minute SLO.",
+    ],
+  },
+  {
+    title: "Frontend Intern",
+    company: "IDMS Infotech",
+    period: "01/2025 – 06/2025 | Mumbai, India",
+    summary:
+      "Developed frontend UI applications for the IDMS team, working across modern web interfaces, reusable components, and frontend migration tasks.",
+    bullets: [
+      "Worked on frontend UI applications and reusable React.js components.",
+      "Migrated selected frontend modules from Angular to React.js.",
+      "Implemented client-side routing, API integrations, responsive layouts, and application state handling.",
+      "Used Git and daily reporting practices throughout the frontend development workflow.",
     ],
   },
   {

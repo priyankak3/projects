@@ -11,9 +11,7 @@ import {
   GraduationCap,
   Layers3,
   Mail,
-  MapPin,
   Server,
-  Terminal,
 } from 'lucide-react';
 import {
   achievements,
@@ -26,11 +24,8 @@ import {
   skillCategories,
 } from '@/data/portfolio';
 import { ThemeToggle } from '@/components/theme-toggle';
-import {
-  siGithub,
-  siLeetcode,
-  siHackerrank,
-} from 'simple-icons';
+import { ExperienceTimeline } from '@/components/experience-timeline';
+import { SocialPreviews } from '@/components/social-previews';
 const iconMap = {
   Code2,
   Layers3,
@@ -39,30 +34,7 @@ const iconMap = {
   Cloud,
   Database,
 };
-const linkedInIcon = {
-  path: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM3.555 9h3.564v11.452H3.555V9zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
-};
 const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Contact'];
-function BrandIcon({
-  icon,
-  size = 15,
-}: {
-  icon: { path: string };
-  size?: number;
-}) {
-  return (
-    <svg
-      role="img"
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d={icon.path} />
-    </svg>
-  );
-}
 export default function Home() {
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300 selection:bg-[var(--text)] selection:text-[var(--bg)]">
@@ -98,11 +70,11 @@ export default function Home() {
         <section id="home" className="py-12 sm:py-20 lg:py-24">
           <div className="w-full">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--panel)] px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--text)]">
-              <span className="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--text)]" />
+              <span className="status-dot inline-flex h-2.5 w-2.5 rounded-full" />
               {profile.yearsOfExperience} experience
             </div>
 
-           <p className="mb-4 text-sm font-medium tracking-wide text-violet-700 dark:text-violet-300 sm:text-base">
+           <p className="accent-text mb-4 text-sm font-medium tracking-wide sm:text-base">
               Hi, my name is
             </p>
 
@@ -119,7 +91,7 @@ export default function Home() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href="#projects" className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--text)] px-5 py-3 text-sm font-medium text-[var(--bg)] transition hover:opacity-90">
+              <a href="#projects" className="accent-button inline-flex items-center gap-2 rounded-full border border-transparent px-5 py-3 text-sm font-medium transition hover:opacity-90">
                 View selected work
                 <ChevronRight size={16} />
               </a>
@@ -130,32 +102,13 @@ export default function Home() {
               </a>
             </div>
 
-           <div className="mt-10 flex flex-wrap items-center gap-3">
-  {[
-    { label: 'GitHub', href: profile.github || '#contact', brandIcon: siGithub },
-    { label: 'LinkedIn', href: profile.linkedin.startsWith('http') ? profile.linkedin : `https://www.${profile.linkedin}`,  brandIcon: linkedInIcon },
-    { label: 'LeetCode', href: profile.leetcode || '#contact', brandIcon: siLeetcode },
-    { label: 'HackerRank', href: profile.hackerrank || '#contact', brandIcon: siHackerrank },
-    { label: 'Email', href: `mailto:${profile.email}`, Icon: Mail },
-    { label: 'Location', href: '#contact', Icon: MapPin },
-  ].map(({ label, href, Icon, brandIcon }) => (
-    <a
-      key={label}
-      href={href}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noreferrer' : undefined}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--panel)] text-[var(--text)] transition hover:opacity-90"
-      aria-label={label}
-      title={label}
-    >
-      {brandIcon ? (
-        <BrandIcon icon={brandIcon} size={16} />
-      ) : (
-        Icon && <Icon size={15} />
-      )}
-    </a>
-  ))}
-</div>
+            <SocialPreviews
+              github={profile.github}
+              linkedin={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`}
+              leetcode={profile.leetcode}
+              hackerrank={profile.hackerrank}
+              email={profile.email}
+            />
           </div>
         </section>
 
@@ -287,30 +240,42 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-medium tracking-[-0.05em] text-[var(--text)] sm:text-5xl">Career momentum.</h2>
           </div>
 
-          <div className="space-y-4">
-            {experience.map((role) => (
-              <div key={role.title} className="rounded-[1.8rem] border border-[var(--line)] bg-[var(--panel)] p-5 sm:p-6">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <div className="text-[10px] uppercase tracking-[0.22em] text-[var(--muted)]">{role.period}</div>
-                    <h3 className="mt-2 text-xl font-medium tracking-[-0.04em] text-[var(--text)] sm:text-2xl">{role.title}</h3>
-                    <div className="mt-2 text-sm text-[var(--muted)]">{role.company}</div>
+          <ExperienceTimeline>
+            <div className="space-y-6 lg:space-y-16">
+              {experience.map((role, index) => (
+                <div
+                  key={`${role.title}-${role.company}`}
+                  className="relative grid gap-5 lg:grid-cols-2 lg:items-start"
+                >
+                  <div className={`pl-10 lg:pl-0 lg:pr-12 ${index % 2 === 1 ? 'lg:col-start-2 lg:pl-12 lg:pr-0' : ''}`}>
+                    <article className="experience-card rounded-[1.8rem] border border-[var(--line)] bg-[var(--panel)] p-5 text-left sm:p-6 lg:text-center">
+                      <div className="mb-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--accent)]">
+                        {role.period}
+                      </div>
+                      <h3 className="text-xl font-medium tracking-[-0.04em] text-[var(--text)] sm:text-2xl">
+                        {role.title}
+                      </h3>
+                      <div className="mt-2 text-sm text-[var(--muted)]">
+                        {role.company}
+                      </div>
+                      <p className="mt-5 text-sm leading-7 text-[var(--muted)]">
+                        {role.summary}
+                      </p>
+                      <ul className="mt-5 space-y-3 text-sm text-[var(--muted)]">
+                        {role.bullets.map((bullet) => (
+                          <li key={bullet} className="flex gap-3 text-left leading-7">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </article>
                   </div>
+                  <span className="experience-node absolute left-4 top-8 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[var(--accent)] lg:left-1/2" />
                 </div>
-
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">{role.summary}</p>
-
-                <ul className="mt-5 space-y-3 text-sm text-[var(--muted)] sm:text-base">
-                  {role.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-3 leading-7">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[var(--text)]" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ExperienceTimeline>
         </section>
 
         <section className="reveal py-16 sm:py-20">
